@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Atividade Avaliativa - Química</title>
     <style>
+        /* Seu CSS já está bem organizado, mantenha conforme fornecido */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -277,6 +278,10 @@
 
         <!-- Bloco de Script -->
         <script>
+            // URL do seu Web App do Google Apps Script
+            const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbySdhjDEiw63KOV0JV-hhLFe8ihbQM9eal4nRXzgzWh9SNG6JAg7JMQVTHXKVhshEA/exec'; // Substitua 'SEU_SCRIPT_ID' pela URL correta
+
+            // Array contendo as questões da atividade
             const questoes = [
                 // Questões 1 a 10: 'aberta'
                 {
@@ -411,10 +416,7 @@ Pergunta:
                 }
             ];
 
-            // URL do seu Web App do Google Apps Script
-            const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbw1-mx_tmXNOnXa7kVcrf6-PbsrjcOwi9k5-J9VYvY4gkr5gHHLXQkQlaqu--j8uA3E/exec'; // Substitua 'SEU_SCRIPT_ID' pela URL correta
-
-            // Objeto para armazenar os timers
+            // Objeto para armazenar os timers de cada questão
             const timers = {};
 
             // Função para iniciar o cronômetro de uma questão
@@ -423,7 +425,7 @@ Pergunta:
                     timers[questaoId] = { segundos: 0, intervalo: null };
                     timers[questaoId].intervalo = setInterval(() => {
                         timers[questaoId].segundos += 1;
-                        document.getElementById(`relogio-${questaoId}`).innerText = formatarTempo(timers[questaoId].segundos);
+                        atualizarCronometro(questaoId);
                     }, 1000);
                 }
             }
@@ -438,22 +440,32 @@ Pergunta:
 
             // Função para formatar o tempo em mm:ss
             function formatarTempo(segundos) {
-                const min = Math.floor(segundos / 60).toString().padStart(2, '0');
-                const sec = (segundos % 60).toString().padStart(2, '0');
-                return `${min}:${sec}`;
+                const minutos = Math.floor(segundos / 60).toString().padStart(2, '0');
+                const segundosRestantes = (segundos % 60).toString().padStart(2, '0');
+                return `${minutos}:${segundosRestantes}`;
             }
 
-            // Função para enviar as respostas
+            // Função para atualizar o display do cronômetro
+            function atualizarCronometro(questaoId) {
+                const relogioElement = document.getElementById(`relogio-${questaoId}`);
+                if (relogioElement) {
+                    relogioElement.textContent = formatarTempo(timers[questaoId].segundos);
+                }
+            }
+
+            // Função para enviar as respostas para o backend
             async function enviarRespostas() {
                 const nome = document.getElementById('nome').value.trim();
                 const serie = document.getElementById('serie').value;
                 const data = document.getElementById('data').value;
 
+                // Validação dos campos obrigatórios
                 if (!nome || !serie || !data) {
                     alert("Por favor, preencha todos os campos antes de enviar.");
                     return;
                 }
 
+                // Coleta das respostas e tempos
                 let respostas = {
                     'nome': nome,
                     'serie': serie,
@@ -478,77 +490,81 @@ Pergunta:
                     });
 
                     // Verificar se a resposta é válida
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+
                     const result = await response.json();
+                    console.log(result); // Log da resposta para depuração
 
                     if (result.result === 'success') {
                         // Limpar o formulário
-                        document.getElementById('nome').value = "";
-                        document.getElementById('serie').value = "";
-                        document.getElementById('data').value = "";
-                        for (let i = 1; i <= totalQuestoes; i++) {
-                            document.getElementById(`resposta-${i}`).value = "";
-                            document.getElementById(`relogio-${i}`).innerText = "00:00";
-                        }
+                        limparFormulario(totalQuestoes);
 
                         // Exibir pontuação e feedback
-                        const pontuacao = result.pontuacao;
-                        const total = result.total;
-                        const feedback = result.feedback;
-
-                        // Construir feedback detalhado com mensagem de sucesso
-                        let feedbackHTML = `<p><strong>Atividade enviada com sucesso!</strong></p>`;
-                        feedbackHTML += `<p><strong>Pontuação Total:</strong> ${pontuacao} / ${total}</p><hr>`;
-                        feedbackHTML += `<h4>Feedback Detalhado:</h4>`;
-
-                        for (let i = 1; i <= totalQuestoes; i++) {
-                            const tipo = questoes[i - 1].tipo;
-                            const status = feedback[i].corretas ? 'Correta' : 'Incorreta';
-                            const detalhes = feedback[i].feedback;
-                            const tempo = feedback[i].tempo;
-                            feedbackHTML += `
-                                <div class="feedback-questao ${feedback[i].corretas ? 'correct' : 'incorrect'}" data-questao="${i}">
-                                    <p><strong>Questão ${i} (${tipo === 'aberta' ? 'Aberta' : 'Múltipla Escolha'}):</strong> ${status}</p>
-                                    <p>${detalhes}</p>
-                                    <p><strong>Tempo gasto:</strong> ${formatarTempo(tempo)}</p>
-                                </div>
-                            `;
-                        }
-
-                        // Exibir o feedback na página
-                        const feedbackContainer = document.getElementById('feedback-container');
-                        const feedbackContent = document.getElementById('feedback-content');
-                        feedbackContent.innerHTML = feedbackHTML;
-                        feedbackContainer.style.display = 'block';
-
-                        // Scroll para o feedback
-                        feedbackContainer.scrollIntoView({ behavior: 'smooth' });
-
+                        exibirFeedback(result.pontuacao, result.total, result.feedback, totalQuestoes);
                     } else {
-                        // Remover a mensagem de erro conforme solicitado
-                        // Se desejar manter alguma forma de notificação, você pode implementar outra abordagem
+                        // Exibir mensagem de erro no feedback-container
+                        exibirErro(`Erro: ${result.error || "Erro ao enviar as respostas. Por favor, tente novamente."}`);
                         console.error("Erro ao enviar as respostas:", result.error);
-                        // Por exemplo, mostrar uma mensagem no feedback container
-                        const feedbackContainer = document.getElementById('feedback-container');
-                        const feedbackContent = document.getElementById('feedback-content');
-                        feedbackContent.innerHTML = `<p style="color: red;"><strong>Erro ao enviar as respostas. Por favor, tente novamente.</strong></p>`;
-                        feedbackContainer.style.display = 'block';
-                        feedbackContainer.scrollIntoView({ behavior: 'smooth' });
                     }
                 } catch (error) {
                     console.error('Erro ao enviar respostas:', error);
-                    // Remover a mensagem de erro conforme solicitado
-                    // Se desejar manter alguma forma de notificação, você pode implementar outra abordagem
-                    const feedbackContainer = document.getElementById('feedback-container');
-                    const feedbackContent = document.getElementById('feedback-content');
-                    feedbackContent.innerHTML = `<p style="color: red;"><strong>Erro ao enviar as respostas. Por favor, tente novamente.</strong></p>`;
-                    feedbackContainer.style.display = 'block';
-                    feedbackContainer.scrollIntoView({ behavior: 'smooth' });
+                    exibirErro(`Erro: ${error.message || "Erro ao enviar as respostas. Por favor, tente novamente."}`);
                 }
             }
 
-            // Inicializa as questões ao carregar a página
-            window.onload = gerarQuestoes;
+            // Função para limpar o formulário após envio
+            function limparFormulario(totalQuestoes) {
+                document.getElementById('nome').value = "";
+                document.getElementById('serie').value = "";
+                document.getElementById('data').value = "";
+                for (let i = 1; i <= totalQuestoes; i++) {
+                    document.getElementById(`resposta-${i}`).value = "";
+                    document.getElementById(`relogio-${i}`).innerText = "00:00";
+                }
+            }
 
+            // Função para exibir feedback detalhado
+            function exibirFeedback(pontuacao, total, feedback, totalQuestoes) {
+                let feedbackHTML = `<p><strong>Atividade enviada com sucesso!</strong></p>`;
+                feedbackHTML += `<p><strong>Pontuação Total:</strong> ${pontuacao} / ${total}</p><hr>`;
+                feedbackHTML += `<h4>Feedback Detalhado:</h4>`;
+
+                for (let i = 1; i <= totalQuestoes; i++) {
+                    const tipo = questoes[i - 1].tipo;
+                    const status = feedback[i].corretas ? 'Correta' : 'Incorreta';
+                    const detalhes = feedback[i].feedback;
+                    const tempo = feedback[i].tempo;
+                    feedbackHTML += `
+                        <div class="feedback-questao ${feedback[i].corretas ? 'correct' : 'incorrect'}" data-questao="${i}">
+                            <p><strong>Questão ${i} (${tipo === 'aberta' ? 'Aberta' : 'Múltipla Escolha'}):</strong> ${status}</p>
+                            <p>${detalhes}</p>
+                            <p><strong>Tempo gasto:</strong> ${formatarTempo(tempo)}</p>
+                        </div>
+                    `;
+                }
+
+                // Exibir o feedback na página
+                const feedbackContainer = document.getElementById('feedback-container');
+                const feedbackContent = document.getElementById('feedback-content');
+                feedbackContent.innerHTML = feedbackHTML;
+                feedbackContainer.style.display = 'block';
+
+                // Scroll para o feedback
+                feedbackContainer.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            // Função para exibir mensagem de erro
+            function exibirErro(mensagem) {
+                const feedbackContainer = document.getElementById('feedback-container');
+                const feedbackContent = document.getElementById('feedback-content');
+                feedbackContent.innerHTML = `<p style="color: red;"><strong>${mensagem}</strong></p>`;
+                feedbackContainer.style.display = 'block';
+                feedbackContainer.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            // Função para gerar as questões dinamicamente na página
             function gerarQuestoes() {
                 const container = document.getElementById('questoes-container');
                 questoes.forEach((questao, index) => {
@@ -593,13 +609,14 @@ Pergunta:
                     pergunta.appendChild(document.createTextNode(`${questao.nivel}\n\n${questao.texto}`));
                     questaoDiv.appendChild(pergunta);
 
-                    // Resposta
+                    // Campo de Resposta
                     if (questao.tipo === 'aberta') {
                         const resposta = document.createElement('textarea');
                         resposta.id = `resposta-${questaoId}`;
                         resposta.name = `resposta-${questaoId}`;
                         resposta.placeholder = "Digite sua resposta aqui...";
                         resposta.classList.add('resposta');
+
                         // Iniciar o cronômetro ao focar na textarea
                         resposta.addEventListener('focus', () => iniciarCronometro(questaoId));
                         resposta.addEventListener('blur', () => pararCronometro(questaoId));
@@ -616,8 +633,10 @@ Pergunta:
                     container.appendChild(questaoDiv);
                 });
             }
+
+            // Inicializa as questões ao carregar a página
+            window.onload = gerarQuestoes;
         </script>
 
 </body>
 </html>
-
