@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Atividade Avaliativa - Química</title>
     <style>
-        /* Seu CSS já está bem organizado, mantenha conforme fornecido */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -278,12 +277,12 @@
 
         <!-- Bloco de Script -->
         <script>
-            // URL do seu Web App do Google Apps Script
-            const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbySdhjDEiw63KOV0JV-hhLFe8ihbQM9eal4nRXzgzWh9SNG6JAg7JMQVTHXKVhshEA/exec'; // Substitua 'SEU_SCRIPT_ID' pela URL correta
+            // URL do seu novo Web App do Google Apps Script
+            const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzvdH8uerPvig0BfnRsOwpDaghLbYSMbbv021eDeOeEu86QHPuxOYFx8DZr9D1wfxo/exec'; // Substitua 'SEU_NOVO_SCRIPT_ID' pela URL correta
 
             // Array contendo as questões da atividade
             const questoes = [
-                // Questões 1 a 10: 'aberta'
+                // Questões 1 a 10: tipo 'aberta'
                 {
                     tipo: 'aberta',
                     nivel: 'Nível Básico',
@@ -490,12 +489,7 @@ Pergunta:
                     });
 
                     // Verificar se a resposta é válida
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-
                     const result = await response.json();
-                    console.log(result); // Log da resposta para depuração
 
                     if (result.result === 'success') {
                         // Limpar o formulário
@@ -505,12 +499,12 @@ Pergunta:
                         exibirFeedback(result.pontuacao, result.total, result.feedback, totalQuestoes);
                     } else {
                         // Exibir mensagem de erro no feedback-container
-                        exibirErro(`Erro: ${result.error || "Erro ao enviar as respostas. Por favor, tente novamente."}`);
+                        exibirErro("Erro ao enviar as respostas. Por favor, tente novamente.");
                         console.error("Erro ao enviar as respostas:", result.error);
                     }
                 } catch (error) {
                     console.error('Erro ao enviar respostas:', error);
-                    exibirErro(`Erro: ${error.message || "Erro ao enviar as respostas. Por favor, tente novamente."}`);
+                    exibirErro("Erro ao enviar as respostas. Por favor, tente novamente.");
                 }
             }
 
