@@ -277,8 +277,8 @@
 
         <!-- Bloco de Script -->
         <script>
-            // URL do seu novo Web App do Google Apps Script
-            const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzjI4mwlmV0JI5e7dgB-UonR_J3N8EIvGJ_izjGfWNkULm86GmNE9DJUvbL1SS2Zck/exec'; // Substitua 'SEU_NOVO_SCRIPT_ID' pela URL correta
+            // URL do seu Web App do Google Apps Script
+            const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx5v3zJdwSPnvRKQ6dewxYZtBV__XF-1Aw0Aaq9mHb7Gtog0bcNl2lovRK-539yyqk/exec'; // Substitua 'SEU_NOVO_SCRIPT_ID' pela URL correta
 
             // Array contendo as questões da atividade
             const questoes = [
@@ -454,6 +454,7 @@ Pergunta:
 
             // Função para enviar as respostas para o backend
             async function enviarRespostas() {
+                console.log("Iniciando envio das respostas...");
                 const nome = document.getElementById('nome').value.trim();
                 const serie = document.getElementById('serie').value;
                 const data = document.getElementById('data').value;
@@ -461,6 +462,7 @@ Pergunta:
                 // Validação dos campos obrigatórios
                 if (!nome || !serie || !data) {
                     alert("Por favor, preencha todos os campos antes de enviar.");
+                    console.log("Validação falhou: campos obrigatórios não preenchidos.");
                     return;
                 }
 
@@ -477,7 +479,10 @@ Pergunta:
                     respostas[`resposta-${i}`] = resposta;
                     respostas[`tempo-${i}`] = timers[i] ? timers[i].segundos : 0;
                     pararCronometro(i); // Parar o cronômetro após enviar
+                    console.log(`Questão ${i}: Resposta = ${resposta}, Tempo = ${respostas[`tempo-${i}`]} segundos`);
                 }
+
+                console.log("Enviando dados para o Web App:", respostas);
 
                 try {
                     const response = await fetch(WEB_APP_URL, { // URL do seu Web App
@@ -488,10 +493,14 @@ Pergunta:
                         body: new URLSearchParams(respostas)
                     });
 
+                    console.log("Resposta do servidor recebida:", response);
+
                     // Verificar se a resposta é válida
                     const result = await response.json();
+                    console.log("Dados de resposta JSON:", result);
 
                     if (result.result === 'success') {
+                        console.log("Envio bem-sucedido:", result);
                         // Limpar o formulário
                         limparFormulario(totalQuestoes);
 
@@ -499,8 +508,8 @@ Pergunta:
                         exibirFeedback(result.pontuacao, result.total, result.feedback, totalQuestoes);
                     } else {
                         // Exibir mensagem de erro no feedback-container
+                        console.error("Erro na resposta do servidor:", result.error);
                         exibirErro("Erro ao enviar as respostas. Por favor, tente novamente.");
-                        console.error("Erro ao enviar as respostas:", result.error);
                     }
                 } catch (error) {
                     console.error('Erro ao enviar respostas:', error);
