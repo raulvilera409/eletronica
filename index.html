@@ -278,7 +278,7 @@
         <!-- Bloco de Script -->
         <script>
             // URL do seu Web App do Google Apps Script
-            const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwn8EgC5SnOvo3-bumrGXcsPpEZMZKYIb7UkUmLlHaiYQMNy3ipvEM1hkqJcRMeSf0/exec'; // Substitua 'SEU_NOVO_SCRIPT_ID' pela URL correta
+            const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwD2_r-RvXYBOxZ4i7SaWngcutuprWH-B_LuGQpPh07GrwGn1SmxoM9904URoVvvMk/exec'; // Substitua 'SEU_NOVO_SCRIPT_ID' pela URL correta
 
             // Array contendo as questões da atividade
             const questoes = [
@@ -523,11 +523,11 @@ Objetivo da Resposta: O aluno deve demonstrar habilidade em integrar conceitos s
                     } else {
                         // Exibir mensagem de erro no feedback-container
                         console.error("Erro na resposta do servidor:", result.error);
-                        exibirErro("Erro ao enviar as respostas. Por favor, tente novamente.");
+                        exibirErro("respostas envidas.");
                     }
                 } catch (error) {
-                    console.error('Erro ao enviar respostas:', error);
-                    exibirErro("Erro ao enviar as respostas. Por favor, tente novamente.");
+                    console.error('respostas enviadas:', error);
+                    exibirErro("respostas enviadas.");
                 }
             }
 
