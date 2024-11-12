@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Atividade Avaliativa - Química</title>
     <style>
+        /* [Seu CSS existente permanece inalterado] */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -296,7 +297,7 @@
 
        <script>
     // URL do seu Web App do Google Apps Script
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzd3866qejNZk6l2RwPKZhyKFCYawgdl18Pm992UXfRbhldNlCSv8m7GXNUfxPnlCg/exec'; // Substitua pela sua URL correta
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyJJhktLKjmImpNlaJUCD-masl6sEU1yNX4m8KbM2Vz1GNHx3gbO1D8iPycxwMt6nU/exec'; // Substitua pela sua URL correta
 
     // Array contendo as questões da atividade
     const questoes = [
@@ -388,7 +389,7 @@
             numeroAula: 'Aula 11 - Impacto Ambiental das Ligações Químicas',
             tema: 'Tabela Periódica, Distribuição Eletrônica e Impacto Ambiental',
             habilidade: 'Integrar conhecimentos de distribuição eletrônica, ligações químicas e propriedades periódicas para analisar fenômenos ambientais complexos.',
-            texto: `Questão 10 - Distribuição Eletrônica: Enxofre (S), com número atômico 16: 2,8,6. Oxigênio (O), com número atômico 8: 2,6. Ambos possuem seis elétrons na camada de valência, necessitando de dois elétrons para completar o octeto, o que torna ambos altamente reativos e capazes de formar compostos como SO₂ e H₂SO₄ por meio de ligações covalentes. 2. Ligações Químicas: No SO₂, o enxofre e o oxigênio formam ligações covalentes, compartilhando elétrons para completar o octeto. Esse tipo de ligação permite ao SO₂ dissolver-se em água e reagir com ela, formando H₂SO₄, uma substância altamente ácida. No H₂SO₄, as ligações covalentes também prevalecem entre hidrogênio, enxofre e oxigênio. A polaridade da molécula contribui para sua alta solubilidade em água, o que facilita a formação da chuva ácida. 3. Tabela Periódica e Propriedades Químicas: Enxofre e oxigênio estão no mesmo grupo da Tabela Periódica (calcogênios) e possuem propriedades químicas semelhantes, como alta reatividade com metais e tendência a formar compostos com hidrogênio e oxigênio. No entanto, o enxofre, por ter maior massa e mais camadas eletrônicas, forma compostos que são mais pesados e nocivos, como o H₂SO₄, que, ao reagir com água na atmosfera, origina o H₂SO₄, um ácido responsável por efeitos corrosivos e poluentes significativos no ambiente. Objetivo da Resposta: O aluno deve demonstrar habilidade em integrar conceitos sobre a configuração eletrônica, ligações químicas e propriedades da tabela periódica, aplicando esses conhecimentos ao contexto da formação da chuva ácida e discutindo o impacto ambiental desses compostos.`
+            texto: `Questão 10 - Distribuição Eletrônica: Enxofre (S), com número atômico 16: 2,8,6. Oxigênio (O), com número atômico 8: 2,6. Ambos possuem seis elétrons na camada de valência, necessitando de dois elétrons para completar o octeto, o que os torna altamente reativos e capazes de formar compostos como SO₂ e H₂SO₄ por meio de ligações covalentes. 2. Ligações Químicas: No SO₂, o enxofre e o oxigênio formam ligações covalentes, compartilhando elétrons para completar o octeto. Esse tipo de ligação permite ao SO₂ dissolver-se em água e reagir com ela, formando H₂SO₄, uma substância altamente ácida. No H₂SO₄, as ligações covalentes também prevalecem entre hidrogênio, enxofre e oxigênio. A polaridade da molécula contribui para sua alta solubilidade em água, o que facilita a formação da chuva ácida. 3. Tabela Periódica e Propriedades Químicas: Enxofre e oxigênio estão no mesmo grupo da Tabela Periódica (calcogênios) e possuem propriedades químicas semelhantes, como alta reatividade com metais e tendência a formar compostos com hidrogênio e oxigênio. No entanto, o enxofre, por ter maior massa e mais camadas eletrônicas, forma compostos que são mais pesados e nocivos, como o H₂SO₄, que, ao reagir com água na atmosfera, origina o H₂SO₄, um ácido responsável por efeitos corrosivos e poluentes significativos no ambiente. Objetivo da Resposta: O aluno deve demonstrar habilidade em integrar conceitos sobre a configuração eletrônica, ligações químicas e propriedades da tabela periódica, aplicando esses conhecimentos ao contexto da formação da chuva ácida e discutindo o impacto ambiental desses compostos.`
         }
     ];
 
@@ -453,7 +454,7 @@
         const totalQuestoes = questoes.length; // Número total de questões
         for (let i = 1; i <= totalQuestoes; i++) {
             const resposta = document.getElementById(`resposta-${i}`).value.trim();
-            const tempo = document.getElementById(`tempo-${i}`).value.trim();
+            const tempo = timers[i] ? timers[i].segundos : 0;
 
             respostas[`resposta-${i}`] = resposta;
             respostas[`tempo-${i}`] = tempo;
