@@ -157,6 +157,25 @@
             font-size: 14px;
             font-weight: bold;
         }
+        /* Campo de Tempo */
+        .tempo-container {
+            margin-top: 10px;
+        }
+        .tempo-container label {
+            font-weight: bold;
+            color: #0d47a1;
+        }
+        .tempo-container input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 2px solid #0d47a1;
+            font-size: 16px;
+            font-weight: bold;
+            color: #0d47a1;
+            background-color: white;
+        }
         /* Botão de Envio com Efeito de Afundamento */
         button {
             display: block;
@@ -277,12 +296,100 @@
 
        <script>
     // URL do seu Web App do Google Apps Script
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyJJhktLKjmImpNlaJUCD-masl6sEU1yNX4m8KbM2Vz1GNHx3gbO1D8iPycxwMt6nU/exec'; // Substitua 'SUA_URL_DO_WEB_APP' pela URL correta
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyJJhktLKjmImpNlaJUCD-masl6sEU1yNX4m8KbM2Vz1GNHx3gbO1D8iPycxwMt6nU/exec'; // Substitua pela sua URL correta
 
     // Array contendo as questões da atividade
     const questoes = [
-        // Suas 10 questões aqui, conforme já definidas no HTML
-        // ...
+        // Questão 1
+        {
+            tipo: 'aberta',
+            nivel: 'Nível Básico',
+            numeroAula: 'Aula 05 - Distribuição Eletrônica',
+            tema: 'Distribuição Eletrônica',
+            habilidade: 'Realizar a distribuição eletrônica de elementos e relacioná-la com a formação de ligações químicas.',
+            texto: `Questão 1 - Maria está aprendendo sobre distribuição eletrônica e quer entender como se faz a organização dos elétrons ao redor do núcleo de um átomo. Para isso, ela escolheu o elemento sódio, que é um dos componentes do sal de cozinha e é essencial para o funcionamento dos nossos nervos. Pergunta: Faça a distribuição eletrônica do sódio (Na), que possui número atômico 11, e explique em qual camada está o elétron de maior energia e qual a sua importância para a formação de ligações químicas.`
+        },
+        // Questão 2
+        {
+            tipo: 'aberta',
+            nivel: 'Nível Intermediário',
+            numeroAula: 'Aula 16 - Ligações Químicas Iônicas',
+            tema: 'Ligações Químicas Iônicas',
+            habilidade: 'Analisar a formação de ligações iônicas e suas implicações na estrutura dos compostos.',
+            texto: `Questão 2 - Durante uma aula de química, o professor explicou que o elemento oxigênio é fundamental para a respiração e está presente no ar em forma de moléculas de O₂. Esse elemento, com número atômico 8, participa de diversas reações químicas devido à sua tendência de receber elétrons. Pergunta: Realize a distribuição eletrônica do oxigênio (O) e explique como essa organização de elétrons influencia a sua capacidade de se combinar com outros elementos. Considere também qual camada eletrônica está incompleta e como isso afeta a reatividade do oxigênio.`
+        },
+        // Questão 3
+        {
+            tipo: 'aberta',
+            nivel: 'Nível Avançado',
+            numeroAula: 'Aula 08 - Ligações Químicas Covalentes',
+            tema: 'Ligações Químicas Covalentes',
+            habilidade: 'Compreender a formação de ligações covalentes e sua influência nas propriedades dos compostos.',
+            texto: `Questão 3 - Em uma pesquisa sobre metais de transição, Rafael descobriu que o ferro (Fe) é muito utilizado na produção de ligas metálicas, como o aço, devido às suas propriedades físicas e à estrutura dos seus elétrons. O ferro possui número atômico 26. Pergunta: Faça a distribuição eletrônica do ferro (Fe) considerando a ordem crescente de energia dos orbitais. Em seguida, explique como a presença de elétrons nos orbitais d influencia as propriedades metálicas e a capacidade de formar diferentes compostos do ferro.`
+        },
+        // Questão 4
+        {
+            tipo: 'aberta',
+            nivel: 'Nível Básico',
+            numeroAula: 'Aula 04 - Ligações Iônicas',
+            tema: 'Ligações Químicas Iônicas',
+            habilidade: 'Descrever a formação de ligações iônicas entre elementos metálicos e não metálicos.',
+            texto: `Questão 4 - Ligação iônica em NaCl: O sódio (Na) possui um elétron na camada de valência (3s¹), que ele perde para se estabilizar. O cloro (Cl), com sete elétrons na camada de valência (3s² 3p⁵), precisa de um elétron para completar seu octeto. Quando o sódio perde seu elétron, ele se torna Na⁺, e o cloro ao receber esse elétron se torna Cl⁻. A atração entre esses íons opostos forma a ligação iônica, resultando no composto NaCl.`
+        },
+        // Questão 5
+        {
+            tipo: 'aberta',
+            nivel: 'Nível Intermediário',
+            numeroAula: 'Aula 06 - Ligações Iônicas',
+            tema: 'Ligações Químicas Iônicas',
+            habilidade: 'Analisar a formação de ligações iônicas em compostos poliatômicos.',
+            texto: `Questão 5 - Em um laboratório, cientistas estão desenvolvendo um composto para o tratamento de águas poluídas, utilizando sulfato de cálcio (CaSO₄). O cálcio, um metal alcalino-terroso, forma ligações iônicas com ânions devido à sua tendência de perder elétrons. Pergunta: Descreva o processo de formação da ligação iônica entre o cálcio (Ca) e o íon sulfato (SO₄²⁻), explicando como o cálcio atinge a estabilidade eletrônica. Em seguida, mostre a estrutura final do composto formado e a razão pela qual ele é um bom material para tratamentos em ambientes aquáticos.`
+        },
+        // Questão 6
+        {
+            tipo: 'aberta',
+            nivel: 'Nível Avançado',
+            numeroAula: 'Aula 09 - Ligações Iônicas Avançadas',
+            tema: 'Ligações Químicas Iônicas',
+            habilidade: 'Explicar a formação e estabilidade de ligações iônicas em compostos complexos.',
+            texto: `Questão 6 - Durante uma investigação sobre compostos iônicos, Lucas encontrou o brometo de magnésio (MgBr₂), usado em processos industriais para controlar reações químicas. O magnésio e o bromo se combinam por meio de ligações iônicas. Pergunta: Explique como ocorre a formação da ligação iônica no brometo de magnésio (MgBr₂), detalhando o processo de transferência de elétrons do magnésio para o bromo. Em seguida, analise como a diferença de eletronegatividade entre os elementos contribui para a estabilidade da ligação iônica no composto formado.`
+        },
+        // Questão 7
+        {
+            tipo: 'aberta',
+            nivel: 'Nível Básico',
+            numeroAula: 'Aula 01 - Distribuição Eletrônica',
+            tema: 'Distribuição Eletrônica',
+            habilidade: 'Realizar a distribuição eletrônica de elementos e relacioná-la com suas propriedades químicas.',
+            texto: `Questão 7 - Durante uma aula de química, o professor pediu aos alunos que localizassem o elemento potássio na tabela periódica e analisassem suas propriedades. Com número atômico 19, o potássio é um metal alcalino e apresenta características típicas dessa família de elementos. Pergunta: Realize a distribuição eletrônica do potássio (K) e localize-o na tabela periódica. Explique como a sua posição na tabela e a configuração eletrônica influenciam sua reatividade e seu papel biológico nas células.`
+        },
+        // Questão 8
+        {
+            tipo: 'aberta',
+            nivel: 'Nível Intermediário',
+            numeroAula: 'Aula 07 - Distribuição Eletrônica em Metais de Transição',
+            tema: 'Tabela Periódica e Distribuição Eletrônica',
+            habilidade: 'Compreender a distribuição eletrônica de metais de transição e suas implicações nas propriedades químicas.',
+            texto: `Questão 8 - Estudando os elementos de transição, Júlia descobriu o cobre, que tem número atômico 29. Esse elemento é usado amplamente em fiações elétricas e sistemas eletrônicos devido às suas propriedades de condução de eletricidade e calor. Pergunta: Faça a distribuição eletrônica do cobre (Cu) e identifique sua posição na tabela periódica. Em seguida, analise como a configuração eletrônica do cobre explica suas propriedades de condução e a sua capacidade de formar ligações com outros metais.`
+        },
+        // Questão 9
+        {
+            tipo: 'aberta',
+            nivel: 'Nível Avançado',
+            numeroAula: 'Aula 10 - Propriedades dos Metais de Transição',
+            tema: 'Tabela Periódica e Distribuição Eletrônica',
+            habilidade: 'Analisar a influência da distribuição eletrônica nas propriedades físicas e químicas dos metais de transição.',
+            texto: `Questão 9 - Em pesquisas sobre elementos essenciais para organismos vivos, Henrique encontrou o molibdênio, um elemento de número atômico 42 e comumente utilizado em ligas metálicas de alta resistência. O molibdênio é essencial para algumas enzimas que atuam na fixação de nitrogênio. Pergunta: Realize a distribuição eletrônica do molibdênio (Mo) e localize-o na tabela periódica. Em seguida, explique como a sua posição e configuração eletrônica influenciam sua capacidade de formar complexos metálicos e sua importância para processos bioquímicos, como a fixação de nitrogênio em plantas.`
+        },
+        // Questão 10
+        {
+            tipo: 'aberta',
+            nivel: 'Nível Desafiador',
+            numeroAula: 'Aula 11 - Impacto Ambiental das Ligações Químicas',
+            tema: 'Tabela Periódica, Distribuição Eletrônica e Impacto Ambiental',
+            habilidade: 'Integrar conhecimentos de distribuição eletrônica, ligações químicas e propriedades periódicas para analisar fenômenos ambientais complexos.',
+            texto: `Questão 10 - Distribuição Eletrônica: Enxofre (S), com número atômico 16: 2,8,6. Oxigênio (O), com número atômico 8: 2,6. Ambos possuem seis elétrons na camada de valência, necessitando de dois elétrons para completar o octeto, o que torna ambos altamente reativos e capazes de formar compostos como SO₂ e H₂SO₄ por meio de ligações covalentes. 2. Ligações Químicas: No SO₂, o enxofre e o oxigênio formam ligações covalentes, compartilhando elétrons para completar o octeto. Esse tipo de ligação permite ao SO₂ dissolver-se em água e reagir com ela, formando H₂SO₄, uma substância altamente ácida. No H₂SO₄, as ligações covalentes também prevalecem entre hidrogênio, enxofre e oxigênio. A polaridade da molécula contribui para sua alta solubilidade em água, o que facilita a formação da chuva ácida. 3. Tabela Periódica e Propriedades Químicas: Enxofre e oxigênio estão no mesmo grupo da Tabela Periódica (calcogênios) e possuem propriedades químicas semelhantes, como alta reatividade com metais e tendência a formar compostos com hidrogênio e oxigênio. No entanto, o enxofre, por ter maior massa e mais camadas eletrônicas, forma compostos que são mais pesados e nocivos, como o H₂SO₄, que, ao reagir com água na atmosfera, origina o H₂SO₄, um ácido responsável por efeitos corrosivos e poluentes significativos no ambiente. Objetivo da Resposta: O aluno deve demonstrar habilidade em integrar conceitos sobre a configuração eletrônica, ligações químicas e propriedades da tabela periódica, aplicando esses conhecimentos ao contexto da formação da chuva ácida e discutindo o impacto ambiental desses compostos.`
+        }
     ];
 
     // Objeto para armazenar os timers de cada questão
@@ -343,7 +450,7 @@
             'data': data
         };
 
-        const totalQuestoes = 10; // Número total de questões
+        const totalQuestoes = questoes.length; // Número total de questões
         for (let i = 1; i <= totalQuestoes; i++) {
             const resposta = document.getElementById(`resposta-${i}`).value.trim();
             const tempo = document.getElementById(`tempo-${i}`).value.trim();
@@ -502,11 +609,14 @@
             }
 
             // Campo de Tempo
+            const tempoContainer = document.createElement('div');
+            tempoContainer.classList.add('tempo-container');
+
             const tempoLabel = document.createElement('label');
             tempoLabel.setAttribute('for', `tempo-${questaoId}`);
             tempoLabel.textContent = "Tempo (s):";
-            questaoDiv.appendChild(tempoLabel);
-            questaoDiv.appendChild(document.createElement('br'));
+            tempoContainer.appendChild(tempoLabel);
+            tempoContainer.appendChild(document.createElement('br'));
 
             const tempoInput = document.createElement('input');
             tempoInput.type = 'number';
@@ -514,9 +624,11 @@
             tempoInput.name = `tempo-${questaoId}`;
             tempoInput.min = '0';
             tempoInput.required = true;
-            questaoDiv.appendChild(tempoInput);
-            questaoDiv.appendChild(document.createElement('br'));
-            questaoDiv.appendChild(document.createElement('br'));
+            tempoContainer.appendChild(tempoInput);
+            tempoContainer.appendChild(document.createElement('br'));
+            tempoContainer.appendChild(document.createElement('br'));
+
+            questaoDiv.appendChild(tempoContainer);
 
             // Adicionar linha separadora entre questões, exceto após a última
             if (questaoId < questoes.length) {
@@ -531,4 +643,7 @@
 
     // Inicializa as questões ao carregar a página
     window.onload = gerarQuestoes;
-</script>
+    </script>
+
+</body>
+</html>
