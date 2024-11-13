@@ -9,12 +9,11 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            /* Degradê de azul escuro para verde limão */
             background: linear-gradient(135deg, #0d47a1, #aeea00);
             color: #333;
         }
         .form-container {
-            background-color: rgba(255, 255, 255, 0.9); /* Fundo branco semi-transparente */
+            background-color: rgba(255, 255, 255, 0.9);
             margin: 20px auto;
             padding: 30px;
             border-radius: 10px;
@@ -31,7 +30,7 @@
         .header h1 {
             font-size: 28px;
             margin: 0;
-            color: #0d47a1; /* Azul escuro */
+            color: #0d47a1;
         }
         /* Conteúdo do Formulário */
         .form-content {
@@ -94,7 +93,7 @@
         }
         /* Estilo para Numeração das Questões */
         .numero-questao {
-            color: #d32f2f; /* Vermelho */
+            color: #d32f2f;
             font-weight: bold;
             margin-right: 10px;
         }
@@ -113,7 +112,7 @@
         }
         /* Valor da Questão */
         .valor-questao {
-            background-color: #388e3c; /* Verde */
+            background-color: #388e3c;
             color: #ffffff;
             padding: 5px 10px;
             border-radius: 5px;
@@ -127,7 +126,7 @@
         /* Questão */
         .questao {
             margin-bottom: 30px;
-            background-color: #d3d3d3; /* Cinza Claro */
+            background-color: #d3d3d3;
             padding: 20px;
             border-radius: 8px;
             position: relative;
@@ -135,7 +134,7 @@
         .questao p {
             margin-bottom: 15px;
             font-size: 16px;
-            color: #333333; /* Texto escuro */
+            color: #333333;
         }
         /* Campo de Resposta */
         .resposta {
@@ -188,7 +187,7 @@
             padding: 20px;
             border-radius: 8px;
             margin-top: 20px;
-            display: none; /* Inicialmente escondido */
+            display: none;
         }
         .feedback-container h3 {
             margin-top: 0;
@@ -200,15 +199,15 @@
             border-radius: 5px;
         }
         .feedback-questao.correct {
-            background-color: #d1e7dd; /* Azul Claro */
+            background-color: #d1e7dd;
             color: #0f5132;
         }
         .feedback-questao.incorrect {
-            background-color: #f8d7da; /* Vermelho Claro */
+            background-color: #f8d7da;
             color: #842029;
         }
         .feedback-questao.partial {
-            background-color: #fff3cd; /* Amarelo Claro */
+            background-color: #fff3cd;
             color: #664d03;
         }
         /* Responsividade */
@@ -286,7 +285,7 @@
 
        <script>
     // URL do seu Web App do Google Apps Script
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyRhpJksbB7rKJKIQU9NqPVpNXpNOSVT1YgPR9Birzoecwbl2gUzgrePCNoz4hzHmI/exec'; // Substitua "SEU_WEB_APP_ID" pela sua URL real
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxYWE_8oJWWon_bWvCWSHD72GU_CyhLqLArNc-9kQhapXLmxznMCvAhPDS8sU-bbTg/exec'; // Substitua "SEU_WEB_APP_ID" pela sua URL real
 
     // Lista de nomes fornecida, organizada em um array
     const nomes = [
@@ -440,7 +439,6 @@
         // Questão 1
         {
             tipo: 'aberta',
-            nivel: 'Nível Básico',
             numeroAula: 'Aula 05 - Distribuição Eletrônica',
             tema: 'Distribuição Eletrônica',
             habilidade: 'Realizar a distribuição eletrônica de elementos e relacioná-la com a formação de ligações químicas.',
@@ -449,7 +447,6 @@
         // Questão 2
         {
             tipo: 'aberta',
-            nivel: 'Nível Intermediário',
             numeroAula: 'Aula 16 - Ligações Químicas Iônicas',
             tema: 'Ligações Químicas Iônicas',
             habilidade: 'Analisar a formação de ligações iônicas e suas implicações na estrutura dos compostos.',
@@ -458,7 +455,6 @@
         // Questão 3
         {
             tipo: 'aberta',
-            nivel: 'Nível Avançado',
             numeroAula: 'Aula 08 - Ligações Químicas Covalentes',
             tema: 'Ligações Químicas Covalentes',
             habilidade: 'Compreender a formação de ligações covalentes e sua influência nas propriedades dos compostos.',
@@ -467,7 +463,6 @@
         // Questão 4
         {
             tipo: 'aberta',
-            nivel: 'Nível Básico',
             numeroAula: 'Aula 04 - Ligações Iônicas',
             tema: 'Ligações Químicas Iônicas',
             habilidade: 'Descrever a formação de ligações iônicas entre elementos metálicos e não metálicos.',
@@ -476,7 +471,6 @@
         // Questão 5
         {
             tipo: 'aberta',
-            nivel: 'Nível Intermediário',
             numeroAula: 'Aula 06 - Ligações Iônicas',
             tema: 'Ligações Químicas Iônicas',
             habilidade: 'Analisar a formação de ligações iônicas em compostos poliatômicos.',
@@ -485,7 +479,6 @@
         // Questão 6
         {
             tipo: 'aberta',
-            nivel: 'Nível Avançado',
             numeroAula: 'Aula 09 - Ligações Iônicas Avançadas',
             tema: 'Ligações Químicas Iônicas',
             habilidade: 'Explicar a formação e estabilidade de ligações iônicas em compostos complexos.',
@@ -494,7 +487,6 @@
         // Questão 7
         {
             tipo: 'aberta',
-            nivel: 'Nível Básico',
             numeroAula: 'Aula 01 - Distribuição Eletrônica',
             tema: 'Distribuição Eletrônica',
             habilidade: 'Realizar a distribuição eletrônica de elementos e relacioná-la com suas propriedades químicas.',
@@ -503,7 +495,6 @@
         // Questão 8
         {
             tipo: 'aberta',
-            nivel: 'Nível Intermediário',
             numeroAula: 'Aula 07 - Distribuição Eletrônica em Metais de Transição',
             tema: 'Tabela Periódica e Distribuição Eletrônica',
             habilidade: 'Compreender a distribuição eletrônica de metais de transição e suas implicações nas propriedades químicas.',
@@ -512,7 +503,6 @@
         // Questão 9
         {
             tipo: 'aberta',
-            nivel: 'Nível Avançado',
             numeroAula: 'Aula 10 - Propriedades dos Metais de Transição',
             tema: 'Tabela Periódica e Distribuição Eletrônica',
             habilidade: 'Analisar a influência da distribuição eletrônica nas propriedades físicas e químicas dos metais de transição.',
@@ -521,7 +511,6 @@
         // Questão 10
         {
             tipo: 'aberta',
-            nivel: 'Nível Desafiador',
             numeroAula: 'Aula 11 - Impacto Ambiental das Ligações Químicas',
             tema: 'Tabela Periódica, Distribuição Eletrônica e Impacto Ambiental',
             habilidade: 'Integrar conhecimentos de distribuição eletrônica, ligações químicas e propriedades periódicas para analisar fenômenos ambientais complexos.',
@@ -627,15 +616,15 @@
                 limparFormulario(totalQuestoes);
 
                 // Exibir pontuação e feedback
-                exibirFeedback(result.pontuacao, result.total, result.feedback, totalQuestoes);
+                exibirFeedback(result.pontuacao, totalQuestoes);
             } else {
-                // Exibir mensagem de erro no feedback-container
+                // Exibir mensagem de erro específica
                 console.error("Erro na resposta do servidor:", result.error);
-                exibirErro("Erro ao enviar as respostas. Por favor, tente novamente.");
+                exibirErro(`Erro ao enviar as respostas: ${result.error}`);
             }
         } catch (error) {
             console.error('Erro ao enviar respostas:', error);
-            exibirErro("Erro ao enviar as respostas. Por favor, tente novamente.");
+            exibirErro(`Erro ao enviar as respostas: ${error.message}`);
         }
     }
 
@@ -653,22 +642,19 @@
     }
 
     // Função para exibir feedback detalhado
-    function exibirFeedback(pontuacao, total, feedback, totalQuestoes) {
+    function exibirFeedback(pontuacao, totalQuestoes) {
         let feedbackHTML = `<p><strong>Atividade enviada com sucesso!</strong></p>`;
-        feedbackHTML += `<p><strong>Pontuação Total:</strong> ${pontuacao} / ${total}</p><hr>`;
+        feedbackHTML += `<p><strong>Pontuação Total:</strong> ${pontuacao.toFixed(1)} / ${totalQuestoes * 0.3}</p><hr>`;
         feedbackHTML += `<h4>Feedback Detalhado:</h4>`;
 
         for (let i = 1; i <= totalQuestoes; i++) {
-            const tipo = questoes[i - 1].tipo;
-            const pontuacaoQuestao = parseFloat(feedback[i].pontuacao);
-            const status = pontuacaoQuestao === 1 ? 'Correta' : (pontuacaoQuestao === 0 ? 'Incorreta' : 'Parcialmente Correta');
-            const detalhes = feedback[i].feedback;
-            const tempo = feedback[i].tempo || 0;
+            const status = i <= pontuacao / 0.3 ? 'Correta' : 'Incorreta';
+            const classe = i <= pontuacao / 0.3 ? 'correct' : 'incorrect';
+            const tempo = ''; // Opcional: pode-se adicionar tempo gasto se desejado
             feedbackHTML += `
-                <div class="feedback-questao ${pontuacaoQuestao === 1 ? 'correct' : (pontuacaoQuestao === 0 ? 'incorrect' : 'partial')}">
-                    <p><strong>Questão ${i} (${tipo === 'aberta' ? 'Aberta' : 'Múltipla Escolha'}):</strong> ${status}</p>
-                    <p>${detalhes}</p>
-                    <p><strong>Tempo gasto:</strong> ${formatarTempo(tempo)}</p>
+                <div class="feedback-questao ${classe}">
+                    <p><strong>Questão ${i}:</strong> ${status}</p>
+                    <p>${tempo ? `<strong>Tempo gasto:</strong> ${formatarTempo(tempo)}` : ''}</p>
                 </div>
             `;
         }
@@ -732,9 +718,9 @@
             numeroSpan.classList.add('numero-questao');
             numeroSpan.textContent = `${questaoId}. `;
 
-            // Adicionar número, nível e texto da questão
+            // Adicionar número e texto da questão
             pergunta.appendChild(numeroSpan);
-            pergunta.appendChild(document.createTextNode(`${questao.nivel}\n\n${questao.texto}`));
+            pergunta.appendChild(document.createTextNode(`${questao.texto}`));
             questaoDiv.appendChild(pergunta);
 
             // Campo de Resposta
