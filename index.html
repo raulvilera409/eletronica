@@ -286,7 +286,7 @@
 
        <script>
     // URL do seu Web App do Google Apps Script
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwhKev5wnJJHANEWetf6bOFhFUeJGru8pqG7IbrzS3zZgB4kycO65zmka8b4yo9wr8/exec'; // Substitua "SEU_WEB_APP_ID" pela sua URL real
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyjYmxDI-9OJJpZSbgLttZGFBmzoGH4TeddM-CeQ4h7k_aavUPxmrAg2u8zB_Di0fY/exec'; // Substitua "SEU_WEB_APP_ID" pela sua URL real
 
     // Lista de nomes fornecida, organizada em um array
     const nomes = [
@@ -595,7 +595,8 @@
         const totalQuestoes = questoes.length; // Número total de questões
         for (let i = 1; i <= totalQuestoes; i++) {
             const resposta = document.getElementById(`resposta-${i}`).value.trim();
-            const tempo = document.getElementById(`tempo-${i}`) ? parseFloat(document.getElementById(`tempo-${i}`).value) : 0;
+            const tempoInput = document.getElementById(`tempo-${i}`);
+            const tempo = tempoInput ? parseFloat(tempoInput.value) : 0;
 
             respostas[`resposta-${i}`] = resposta;
             respostas[`tempo-${i}`] = tempo; // Inclui o tempo gasto
