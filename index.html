@@ -193,19 +193,6 @@
             margin-top: 0;
             color: #0d47a1;
         }
-        .feedback-questao {
-            margin-bottom: 15px;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .feedback-questao.correct {
-            background-color: #d1e7dd;
-            color: #0f5132;
-        }
-        .feedback-questao.incorrect {
-            background-color: #f8d7da;
-            color: #842029;
-        }
         /* Responsividade */
         @media (max-width: 768px) {
             .form-container {
@@ -281,7 +268,7 @@
 
        <script>
     // URL do seu Web App do Google Apps Script
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxge7rpMqFJId8ZFYoUMRnumcl_XBZHUHoqnF6-vPkNZ1_kWn8YQmA1_OrO6StGkPQ/exec'; // Substitua "SEU_WEB_APP_ID" pela sua URL real
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxRwM0i--67VbrRxdOqGDFGu2FW4UdCirJm00qPuW2w7G7GUoOo7g6BuHIGEQUL_nA/exec'; // Substitua "SEU_WEB_APP_ID" pela sua URL real
 
     // Lista de nomes fornecida, organizada em um array
     const nomes = [
@@ -611,16 +598,16 @@
                 // Limpar o formulário
                 limparFormulario(totalQuestoes);
 
-                // Exibir pontuação e feedback
-                exibirFeedback(result.pontuacao, totalQuestoes, result.feedback);
+                // Exibir mensagem de sucesso
+                exibirMensagemSucesso(result.message);
             } else {
                 // Exibir mensagem de erro específica
-                console.error("Erro na resposta do servidor:", result.error);
-                exibirErro(`Erro ao enviar as respostas: ${result.error}`);
+                console.error("Erro na resposta do servidor:", result.message);
+                exibirMensagemErro(result.message);
             }
         } catch (error) {
             console.error('Erro ao enviar respostas:', error);
-            exibirErro(`Erro ao enviar as respostas: ${error.message}`);
+            exibirMensagemErro(`Erro ao enviar as respostas: ${error.message}`);
         }
     }
 
@@ -637,23 +624,9 @@
         }
     }
 
-    // Função para exibir feedback detalhado
-    function exibirFeedback(pontuacao, totalQuestoes, feedback) {
-        let feedbackHTML = `<p><strong>Atividade enviada com sucesso!</strong></p>`;
-        feedbackHTML += `<p><strong>Pontuação Total:</strong> ${pontuacao.toFixed(1)} / ${(totalQuestoes * 0.3).toFixed(1)}</p><hr>`;
-        feedbackHTML += `<h4>Feedback Detalhado:</h4>`;
-
-        for (let i = 1; i <= totalQuestoes; i++) {
-            const status = feedback[i] || 'Incorreta';
-            const classe = status === 'Correta' ? 'correct' : 'incorrect';
-            const tempo = ''; // Opcional: pode-se adicionar tempo gasto se desejado
-            feedbackHTML += `
-                <div class="feedback-questao ${classe}">
-                    <p><strong>Questão ${i}:</strong> ${status}</p>
-                    <p>${tempo ? `<strong>Tempo gasto:</strong> ${formatarTempo(tempo)}` : ''}</p>
-                </div>
-            `;
-        }
+    // Função para exibir mensagem de sucesso
+    function exibirMensagemSucesso(mensagem) {
+        let feedbackHTML = `<p style="color: green;"><strong>${mensagem}</strong></p>`;
 
         // Exibir o feedback na página
         const feedbackContainer = document.getElementById('feedback-container');
@@ -666,7 +639,7 @@
     }
 
     // Função para exibir mensagem de erro
-    function exibirErro(mensagem) {
+    function exibirMensagemErro(mensagem) {
         const feedbackContainer = document.getElementById('feedback-container');
         const feedbackContent = document.getElementById('feedback-content');
         feedbackContent.innerHTML = `<p style="color: red;"><strong>${mensagem}</strong></p>`;
@@ -706,7 +679,7 @@
             `;
             questaoDiv.appendChild(detalhesDiv);
 
-            // Pergunta com Numeração e Nível
+            // Pergunta com Numeração
             const pergunta = document.createElement('p');
 
             // Criar elemento para número da questão
