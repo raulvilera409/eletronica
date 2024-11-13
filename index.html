@@ -278,7 +278,7 @@
 
        <script>
     // URL do seu Web App do Google Apps Script
-    const WEB_APP_URL = 'https://script.google.com/macros/s/SEU_WEB_APP_ID/exec'; // Substitua "SEU_WEB_APP_ID" pela sua URL real
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxWlgjER96vtCBkoxiIVVcVAfr5ovUtbYR5JO-qth4a_JzgPjJnGXNHRRurP5oNqQQ/exec'; // Substitua "SEU_WEB_APP_ID" pela sua URL real
 
     // Array contendo as questões da atividade
     const questoes = [
@@ -298,7 +298,7 @@
             numeroAula: 'Aula 16 - Ligações Químicas Iônicas',
             tema: 'Ligações Químicas Iônicas',
             habilidade: 'Analisar a formação de ligações iônicas e suas implicações na estrutura dos compostos.',
-            texto: `Questão 2 - Durante uma aula de química, o professor explicou que o elemento oxigênio é fundamental para a respiração e está presente no ar em forma de moléculas de O₂. Esse elemento, com número atômico 8, participa de diversas reações químicas devido à sua tendência de receber elétrons. Pergunta: Realize a distribuição eletrônica do oxigênio (O) e explique como essa organização de elétrons influencia a sua capacidade de se combinar com outros elementos. Considere também qual camada eletrônica está incompleta e como isso afeta a reatividade do oxigênio.`
+            texto: `Questão 2 - João está estudando a importância do oxigênio na respiração celular e quer entender como a configuração eletrônica desse elemento influencia suas propriedades químicas. O oxigênio é essencial para a oxidação e está presente no ar em forma de moléculas de O₂. Esse elemento, com número atômico 8, participa de diversas reações químicas devido à sua tendência de receber elétrons. Pergunta: Realize a distribuição eletrônica do oxigênio (O) e explique como essa organização de elétrons influencia a sua capacidade de se combinar com outros elementos. Considere também qual camada eletrônica está incompleta e como isso afeta a reatividade do oxigênio.`
         },
         // Questão 3
         {
@@ -316,7 +316,7 @@
             numeroAula: 'Aula 04 - Ligações Iônicas',
             tema: 'Ligações Químicas Iônicas',
             habilidade: 'Descrever a formação de ligações iônicas entre elementos metálicos e não metálicos.',
-            texto: `Questão 4 - Ligação iônica em NaCl: O sódio (Na) possui um elétron na camada de valência (3s¹), que ele perde para se estabilizar. O cloro (Cl), com sete elétrons na camada de valência (3s² 3p⁵), precisa de um elétron para completar seu octeto. Quando o sódio perde seu elétron, ele se torna Na⁺, e o cloro ao receber esse elétron se torna Cl⁻. A atração entre esses íons opostos forma a ligação iônica, resultando no composto NaCl.`
+            texto: `Questão 4 - Ana está estudando sobre cloreto de sódio (NaCl), que é o sal de cozinha. Ela aprendeu que o sódio e o cloro se combinam formando uma ligação iônica, que dá origem ao sal que utilizamos na alimentação. Pergunta: Explique como ocorre a ligação iônica entre o sódio (Na) e o cloro (Cl), descrevendo o que acontece com os elétrons de cada elemento. Em seguida, mostre a formação dos íons resultantes e como eles interagem para formar o NaCl.`
         },
         // Questão 5
         {
@@ -415,8 +415,8 @@
     async function enviarRespostas() {
         console.log("Iniciando envio das respostas...");
         const nome = document.getElementById('nome').value.trim();
-        const serie = document.getElementById('serie').value.trim();
-        const data = document.getElementById('data').value.trim();
+        const serie = document.getElementById('serie').value;
+        const data = document.getElementById('data').value;
 
         // Validação dos campos obrigatórios
         if (!nome || !serie || !data) {
@@ -438,7 +438,7 @@
             const tempo = timers[i] ? timers[i].segundos : 0;
 
             respostas[`resposta-${i}`] = resposta;
-            // respostas[`tempo-${i}`] = tempo; // Removido
+            respostas[`tempo-${i}`] = tempo; // Inclui o tempo gasto
             pararCronometro(i); // Parar o cronômetro após enviar
             console.log(`Questão ${i}: Resposta = ${resposta}, Tempo = ${tempo} segundos`);
         }
@@ -485,7 +485,7 @@
         document.getElementById('data').value = "";
         for (let i = 1; i <= totalQuestoes; i++) {
             document.getElementById(`resposta-${i}`).value = "";
-            // document.getElementById(`tempo-${i}`).value = ""; // Removido
+            document.getElementById(`tempo-${i}`).value = ""; // Limpa o tempo
             document.getElementById(`relogio-${i}`).innerText = "00:00";
         }
     }
@@ -589,6 +589,15 @@
                 resposta.addEventListener('blur', () => pararCronometro(questaoId));
                 questaoDiv.appendChild(resposta);
             }
+
+            // Campo de Tempo (oculto)
+            /*
+            const tempoInput = document.createElement('input');
+            tempoInput.type = 'hidden';
+            tempoInput.id = `tempo-${questaoId}`;
+            tempoInput.name = `tempo-${questaoId}`;
+            questaoDiv.appendChild(tempoInput);
+            */
 
             // Adicionar linha separadora entre questões, exceto após a última
             if (questaoId < questoes.length) {
