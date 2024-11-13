@@ -206,10 +206,6 @@
             background-color: #f8d7da;
             color: #842029;
         }
-        .feedback-questao.partial {
-            background-color: #fff3cd;
-            color: #664d03;
-        }
         /* Responsividade */
         @media (max-width: 768px) {
             .form-container {
@@ -285,7 +281,7 @@
 
        <script>
     // URL do seu Web App do Google Apps Script
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxYWE_8oJWWon_bWvCWSHD72GU_CyhLqLArNc-9kQhapXLmxznMCvAhPDS8sU-bbTg/exec'; // Substitua "SEU_WEB_APP_ID" pela sua URL real
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbz90kqixY0EtrAFQ6MRM6jGP8sEHp-heBXocUg4VrZ81ZdqiNNM3lRq8bQs4nnWqX8/exec'; // Substitua "SEU_WEB_APP_ID" pela sua URL real
 
     // Lista de nomes fornecida, organizada em um array
     const nomes = [
@@ -616,7 +612,7 @@
                 limparFormulario(totalQuestoes);
 
                 // Exibir pontuação e feedback
-                exibirFeedback(result.pontuacao, totalQuestoes);
+                exibirFeedback(result.pontuacao, totalQuestoes, result.feedback);
             } else {
                 // Exibir mensagem de erro específica
                 console.error("Erro na resposta do servidor:", result.error);
@@ -642,14 +638,14 @@
     }
 
     // Função para exibir feedback detalhado
-    function exibirFeedback(pontuacao, totalQuestoes) {
+    function exibirFeedback(pontuacao, totalQuestoes, feedback) {
         let feedbackHTML = `<p><strong>Atividade enviada com sucesso!</strong></p>`;
-        feedbackHTML += `<p><strong>Pontuação Total:</strong> ${pontuacao.toFixed(1)} / ${totalQuestoes * 0.3}</p><hr>`;
+        feedbackHTML += `<p><strong>Pontuação Total:</strong> ${pontuacao.toFixed(1)} / ${(totalQuestoes * 0.3).toFixed(1)}</p><hr>`;
         feedbackHTML += `<h4>Feedback Detalhado:</h4>`;
 
         for (let i = 1; i <= totalQuestoes; i++) {
-            const status = i <= pontuacao / 0.3 ? 'Correta' : 'Incorreta';
-            const classe = i <= pontuacao / 0.3 ? 'correct' : 'incorrect';
+            const status = feedback[i] || 'Incorreta';
+            const classe = status === 'Correta' ? 'correct' : 'incorrect';
             const tempo = ''; // Opcional: pode-se adicionar tempo gasto se desejado
             feedbackHTML += `
                 <div class="feedback-questao ${classe}">
